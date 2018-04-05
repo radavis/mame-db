@@ -1,0 +1,21 @@
+#!/usr/bin/env ruby
+require "nokogiri"
+require "pry"
+doc = Nokogiri::XML(open("mame.xml"))
+selector = "//machine/display[@rotate=90 or @rotate=270]"  # roms w/ horizontal orientation
+
+puts "name;description;year;manufacturer;width;height"
+doc.xpath(selector).each do |el|
+  machine = el.parent
+  rom = machine["romof"]
+  name = machine["name"]
+  description = machine.xpath("description").text
+  year = machine.xpath("year").text
+  manufacturer = machine.xpath("manufacturer").text
+
+  display = machine.at_xpath("display")
+  width = display["width"]
+  height = display["height"]
+
+  puts "#{name};#{description};#{year};#{manufacturer};#{width};#{height}" if rom.nil? || rom.empty?
+end
