@@ -3,3 +3,7 @@ ruby "2.5.1"
 
 gem "nokogiri"
 gem "activesupport"
+
+group :test do
+  gem "rspec"
+end
