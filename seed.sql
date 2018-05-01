@@ -1,3 +1,6 @@
+-- the psql COPY FROM syntax requires an **absolute path** to the file to import.
+-- https://wiki.postgresql.org/wiki/COPY
+
 COPY mame_roms (
   name,
   description,
@@ -6,6 +9,7 @@ COPY mame_roms (
   width,
   height
 )
-FROM '/Users/rd/code/vertical-roms/vertical_roms.csv'
+-- FROM '/path/to/your/roms.csv'
+FROM '/Users/rd/code/vertical-roms/romlist.csv'
 DELIMITER ';'
 CSV HEADER;

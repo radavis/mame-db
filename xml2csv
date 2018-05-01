@@ -1,7 +1,14 @@
 #!/usr/bin/env ruby
 require "nokogiri"
-require "pry"
-doc = Nokogiri::XML(open("mame.xml"))
+
+filename = ARGV.first
+
+unless filename
+  puts "USAGE: ./xml2csv input.xml > output.csv"
+  exit(1)
+end
+
+doc = Nokogiri::XML(open(filename))
 selector = "//machine/display[@rotate=90 or @rotate=270]"  # roms w/ horizontal orientation
 
 puts "name;description;year;manufacturer;width;height"
@@ -17,5 +24,6 @@ doc.xpath(selector).each do |el|
   width = display["width"]
   height = display["height"]
 
+  # skip clone roms
   puts "#{name};#{description};#{year};#{manufacturer};#{width};#{height}" if rom.nil? || rom.empty?
 end
