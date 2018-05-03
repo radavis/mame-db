@@ -1,10 +1,11 @@
-DROP TABLE IF EXISTS mame_roms;
-CREATE table mame_roms (
+DROP TABLE IF EXISTS romlist;
+CREATE table romlist (
   id SERIAL,
   name CHARACTER VARYING,
   description CHARACTER VARYING,
   year CHARACTER VARYING,
   manufacturer CHARACTER VARYING,
-  width CHARACTER VARYING,
-  height CHARACTER VARYING
+  width INTEGER,
+  height INTEGER,
+  rotate INTEGER
 );

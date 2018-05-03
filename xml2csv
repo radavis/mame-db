@@ -9,9 +9,9 @@ unless filename
 end
 
 doc = Nokogiri::XML(open(filename))
-selector = "//machine/display[@rotate=90 or @rotate=270]"  # roms w/ horizontal orientation
+selector = "//machine/display"
 
-puts "name;description;year;manufacturer;width;height"
+puts "name;description;year;manufacturer;width;height;rotate"
 doc.xpath(selector).each do |el|
   machine = el.parent
   rom = machine["romof"]
@@ -23,7 +23,8 @@ doc.xpath(selector).each do |el|
   display = machine.at_xpath("display")
   width = display["width"]
   height = display["height"]
+  rotate = display["rotate"]
 
   # skip clone roms
-  puts "#{name};#{description};#{year};#{manufacturer};#{width};#{height}" if rom.nil? || rom.empty?
+  puts "#{name};#{description};#{year};#{manufacturer};#{width};#{height};#{rotate}" if rom.nil? || rom.empty?
 end
