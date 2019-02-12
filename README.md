@@ -23,18 +23,37 @@ $ psql mame
 ## Queries
 
 ```sql
--- Vertical roms from 1986
+-- Vertical roms
 select
   id,
   name,
   substr(description, 1, 30) as description,
-  year, substr(manufacturer, 1, 30) as manufacturer,
+  year,
+  substr(manufacturer, 1, 30) as manufacturer,
+  width,
+  height,
+  rotate
+from romlist
+where rotate = 90 or rotate = 270
+order by
+  year,
+  name;
+```
+
+```sql
+-- Vertical roms from 1982
+select
+  id,
+  name,
+  substr(description, 1, 30) as description,
+  year,
+  substr(manufacturer, 1, 30) as manufacturer,
   width,
   height,
   rotate
 from romlist
 where
-  year = '1986' and
+  year = '1982' and
   (rotate = 90 or rotate = 270)
 order by
   year,
