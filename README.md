@@ -1,6 +1,8 @@
 # mame-db
 
-Build a list of roms supported by MAME, and insert them into a database.
+Build a list of roms supported by the 
+[Multiple Arcade Machine Emulation project](https://en.wikipedia.org/wiki/MAME),
+and insert them into a database.
 
 ## Requirements
 
